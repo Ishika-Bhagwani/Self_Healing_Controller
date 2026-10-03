@@ -1,0 +1,18 @@
+@tailwind base;@tailwind components;@tailwind utilities;
+body{@apply bg-neutral-100 text-neutral-900;font-family:"Noto Sans","Segoe UI",Arial,sans-serif}
+:focus-visible{outline:3px solid #f5a300;outline-offset:2px}
+@layer components{
+ .box{@apply bg-white border border-neutral-300 p-4 mb-4}
+ .h2{@apply font-serif text-xl font-bold mb-3 pb-1 border-b-2 border-navy}
+ .btn{@apply bg-navy text-white border border-navy2 px-4 py-1.5 rounded-sm cursor-pointer disabled:bg-neutral-300 disabled:text-neutral-600 disabled:cursor-not-allowed}
+ .btn-alt{@apply bg-white text-navy}
+ .btn-go{@apply bg-green-700 border-green-900}
+ .fld{@apply block w-full border border-neutral-500 bg-white px-2 py-1.5 rounded-sm mb-3}
+ .lbl{@apply block font-semibold text-sm mb-1}
+ .tbl{@apply w-full border-collapse text-sm bg-white}
+ .tbl th,.tbl td{@apply border border-neutral-300 px-2 py-1.5 text-left align-top}
+ .tbl th{@apply bg-slate-200}
+ .tag{@apply inline-block px-1.5 border border-current text-xs font-semibold whitespace-nowrap}
+ .msg{@apply my-2 px-3 py-2 border border-green-700 text-green-800 bg-white}
+ .err{@apply my-2 px-3 py-2 border border-red-700 text-red-800 bg-white}
+}

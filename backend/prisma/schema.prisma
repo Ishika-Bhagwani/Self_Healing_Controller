@@ -1,0 +1,72 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id Int @id @default(autoincrement())
+  email String @unique
+  password String
+  role String @default("ANALYST")
+}
+model Department {
+  id Int @id @default(autoincrement())
+  name String @unique
+  articles Article[]
+  tickets Ticket[]
+}
+model Client {
+  id Int @id @default(autoincrement())
+  name String @unique
+  articles Article[]
+}
+model Category {
+  id Int @id @default(autoincrement())
+  name String @unique
+  articles Article[]
+}
+model Article {
+  id Int @id @default(autoincrement())
+  code String @unique
+  title String
+  summary String
+  steps String @default("[]")
+  script String?
+  departmentId Int
+  department Department @relation(fields: [departmentId], references: [id])
+  clientId Int?
+  client Client? @relation(fields: [clientId], references: [id])
+  categoryId Int?
+  category Category? @relation(fields: [categoryId], references: [id])
+  createdAt DateTime @default(now())
+  tickets Ticket[]
+}
+model Ticket {
+  id Int @id @default(autoincrement())
+  code String @default("")
+  description String
+  requester String?
+  departmentId Int
+  department Department @relation(fields: [departmentId], references: [id])
+  articleId Int?
+  article Article? @relation(fields: [articleId], references: [id])
+  actualArticleId Int?
+  confidence Int @default(0)
+  status String @default("OPEN")
+  questions String @default("[]")
+  rounds Int @default(0)
+  note String @default("")
+  isNew Boolean @default(true)
+  createdAt DateTime @default(now())
+}
+model AuditLog {
+  id Int @id @default(autoincrement())
+  actor String
+  action String
+  ticketId Int?
+  createdAt DateTime @default(now())
+}
